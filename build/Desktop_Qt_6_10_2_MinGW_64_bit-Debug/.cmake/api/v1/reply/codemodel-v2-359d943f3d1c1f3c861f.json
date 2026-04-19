@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-86606008bc8cc041e383.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "MiracleDressGame",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "MiracleDressGame::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MiracleDressGame-Debug-118315b09eb1a72b1a48.json",
+					"name" : "MiracleDressGame",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MiracleDressGame_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MiracleDressGame_autogen-Debug-1bd79f4d7fbd2dd3c7be.json",
+					"name" : "MiracleDressGame_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MiracleDressGame_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MiracleDressGame_autogen_timestamp_deps-Debug-3c8a2cd4c22752c083f6.json",
+					"name" : "MiracleDressGame_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/MiracleDressGame/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+		"source" : "D:/MiracleDressGame"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

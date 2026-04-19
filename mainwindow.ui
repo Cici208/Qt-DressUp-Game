@@ -1,0 +1,1064 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-image:url(:/images/bg_room.jpg);
+background-repeat:no-repeat;
+background-position:center;
+background-size:cover;</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-image:url(:/images/bg_room.jpg);
+background-repeat:no-repeat;
+background-position:center;
+background-size:cover;</string>
+   </property>
+   <widget class="QLabel" name="personLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>391</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>300</width>
+      <height>400</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;</string>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnPerson1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>81</width>
+      <height>94</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 6px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 70px;
+    min-height: 90px;
+    icon-size: 60px 80px; /* 小人图片缩小 */
+}
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="images.qrc">
+      <normaloff>:/images/person1.png</normaloff>:/images/person1.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnPerson2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>81</width>
+      <height>94</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 6px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 70px;
+    min-height: 90px;
+    icon-size: 60px 80px; /* 小人图片缩小 */
+}
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="images.qrc">
+      <normaloff>:/images/person2.png</normaloff>:/images/person2.png</iconset>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnPerson3">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>10</y>
+      <width>81</width>
+      <height>94</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 6px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 70px;
+    min-height: 90px;
+    icon-size: 60px 80px; /* 小人图片缩小 */
+}
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="images.qrc">
+      <normaloff>:/images/person3.png</normaloff>:/images/person3.png</iconset>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>20</y>
+      <width>351</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="currentIndex">
+     <number>2</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>发饰</string>
+     </attribute>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>291</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>-851</y>
+         <width>275</width>
+         <height>1272</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="5" column="0">
+         <widget class="QPushButton" name="hair6">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair6_thumb.png</normaloff>:/images/hair6_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="hair5">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair5_thumb.png</normaloff>:/images/hair5_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="hair7">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair7_thumb.png</normaloff>:/images/hair7_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="hair3">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair3_thumb.png</normaloff>:/images/hair3_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="hair4">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair4_thumb.png</normaloff>:/images/hair4_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="hair2">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair2_thumb.png</normaloff>:/images/hair2_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="hair1">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair1_thumb.png</normaloff>:/images/hair1_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QPushButton" name="hair8">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair8_thumb.png</normaloff>:/images/hair8_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0">
+         <widget class="QPushButton" name="hair9">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/hair9_thumb.png</normaloff>:/images/hair9_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>裙子</string>
+     </attribute>
+     <widget class="QScrollArea" name="scrollArea_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>291</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>275</width>
+         <height>1412</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="8" column="0">
+         <widget class="QPushButton" name="dress9">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress9_thumb.png</normaloff>:/images/dress9_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0">
+         <widget class="QPushButton" name="dress8">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress8_thumb.png</normaloff>:/images/dress8_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="dress2">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress2_thumb.png</normaloff>:/images/dress2_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QPushButton" name="dress5">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress5_thumb.png</normaloff>:/images/dress5_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="dress7">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress7_thumb.png</normaloff>:/images/dress7_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="dress4">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress4_thumb.png</normaloff>:/images/dress4_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="dress3">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress3_thumb.png</normaloff>:/images/dress3_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="dress1">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress1_thumb.png</normaloff>:/images/dress1_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QPushButton" name="dress6">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress6_thumb.png</normaloff>:/images/dress6_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QPushButton" name="dress10">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/dress10_thumb.png</normaloff>:/images/dress10_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>鞋子</string>
+     </attribute>
+     <widget class="QScrollArea" name="scrollArea_5">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>291</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents_5">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>275</width>
+         <height>572</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="2" column="0">
+         <widget class="QPushButton" name="shoe3">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/shoe3_thumb.png</normaloff>:/images/shoe3_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="shoe1">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/shoe1_thumb.png</normaloff>:/images/shoe1_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="shoe2">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/shoe2_thumb.png</normaloff>:/images/shoe2_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="shoe4">
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    qproperty-alignment: AlignCenter;
+    border-radius: 8px;
+    border: 2px solid white;
+    background-color: rgba(255,255,255,0.15);
+    min-width: 110px;
+    min-height: 130px;
+    icon-size: 95px 105px;
+}
+/* 鼠标悬浮上去 → 粉色高亮（你要的效果） */
+QPushButton:hover {
+    border: 2px solid #ffb6d9;
+    background-color: rgba(255,182,217,0.25);
+}
+/* 点击瞬间轻微变色，不保留框 */
+QPushButton:pressed {
+    border: 2px solid #ff88bb;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="images.qrc">
+            <normaloff>:/images/shoe4_thumb.png</normaloff>:/images/shoe4_thumb.png</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>
