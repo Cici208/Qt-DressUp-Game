@@ -3,6 +3,7 @@
 #include "ui_mainwindow.h"
 #include <QPushButton>
 #include <QScrollBar>
+#include <QRandomGenerator>  // 新增！随机搭配必须用
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -12,15 +13,30 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     this->setFixedSize(900, 600);
     this->statusBar()->hide();
 
-    // 背景：原图比例不拉伸
+    // 背景：原图比例不拉伸 正确写法，样式表单独一段
     this->setStyleSheet(R"(
-    MainWindow {
-        background-image: url(:/images/bg_room.png);
-        background-repeat: no-repeat;
-        background-position: top left;
-        background-size:
-    }
+MainWindow {
+    background-image: url(:/images/bg_room.png);
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: cover;
+}
 )");
+
+    // ======================
+    // 背景音乐初始化  放在样式表外面！独立代码！
+    // ======================
+    m_bgmPlayer = new QMediaPlayer(this);
+    m_audioOutput = new QAudioOutput(this);
+    m_bgmPlayer->setAudioOutput(m_audioOutput);
+
+    m_bgmPlayer->setSource(QUrl("qrc:/audio/bgm.mp3"));
+    m_audioOutput->setVolume(0.5);
+    m_bgmPlayer->setLoops(QMediaPlayer::Infinite);
+
+    // 关联开屏音乐按钮
+    connect(ui->startScreenWidget, &StartScreenWidget::musicToggleRequested,
+            this, &MainWindow::toggleMusic);
 
 
 
@@ -118,6 +134,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
     // 初始显示开屏界面（第0页）
     ui->stackedWidget->setCurrentIndex(0);
+        // ========== 新增：连接三个按钮的点击信号 ==========
+        // 1. 返回按钮：点击切回开屏界面
+        connect(ui->btnReturn, &QPushButton::clicked, this, &MainWindow::goBackToStartScreen);
+        // 2. 清空搭配按钮：点击清空所有服装
+        connect(ui->btnClean, &QPushButton::clicked, this, &MainWindow::clearAllOutfits);
+        // 3. 随机搭配按钮：点击随机选服装
+        connect(ui->btnRandom, &QPushButton::clicked, this, &MainWindow::randomOutfit);
+
+        // 确保按钮显示在最上层（防止被背景挡住）
+        ui->btnReturn->raise();
+        ui->btnClean->raise();
+        ui->btnRandom->raise();
 }
 
 MainWindow::~MainWindow()
@@ -151,4 +179,62 @@ void MainWindow::updateCharacter()
 
     painter.end();
     ui->personLabel->setPixmap(result.scaled(ui->personLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
+// 播放/暂停 切换（你要的功能！）
+void MainWindow::toggleMusic()
+{
+    if (m_bgmPlayer->playbackState() == QMediaPlayer::PlayingState)
+    {
+        // 如果正在播放 → 暂停
+        m_bgmPlayer->pause();
+    }
+    else
+    {
+        // 如果暂停/停止 → 播放
+        m_bgmPlayer->play();
+    }
+}
+// ========== 1. 返回开屏界面功能 ==========
+void MainWindow::goBackToStartScreen()
+{
+    // StackedWidget的第0页是开屏界面，直接切换过去
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+// ========== 2. 清空搭配功能 ==========
+void MainWindow::clearAllOutfits()
+{
+    // 清空你所有的服装变量（和你updateCharacter里的变量完全对应）
+    hair = QPixmap();   // 发型
+    dress = QPixmap();  // 连衣裙
+    shoe = QPixmap();   // 鞋子
+    // 后面你如果加了上衣、下装、袜子，也要在这里一起清空！
+    // 比如：top = QPixmap(); bottom = QPixmap(); socks = QPixmap();
+
+    // 调用updateCharacter，刷新角色显示
+    updateCharacter();
+}
+
+// ========== 3. 随机搭配功能（和你现有的服装数量对应！） ==========
+void MainWindow::randomOutfit()
+{
+    // --- 注意：这里的数字要和你实际的服装数量一致！---
+    // 你的hair有9个（hair1到hair9），所以范围是1-9
+    int randomHair = QRandomGenerator::global()->bounded(1, 10);
+    // 你的dress有10个（dress1到dress10），所以范围是1-10
+    int randomDress = QRandomGenerator::global()->bounded(1, 11);
+    // 你的shoe有4个（shoe1到shoe4），所以范围是1-4
+    int randomShoe = QRandomGenerator::global()->bounded(1, 5);
+
+    // 给服装变量赋值（路径和你selectHair里的路径完全一致！）
+    hair = QPixmap(QString(":/images/hair%1.png").arg(randomHair));
+    dress = QPixmap(QString(":/images/dress%1.png").arg(randomDress));
+    shoe = QPixmap(QString(":/images/shoe%1.png").arg(randomShoe));
+
+    // 后面加了上衣/下装的话，也可以在这里加随机代码
+    // 比如：int randomTop = QRandomGenerator::global()->bounded(1, 6);
+    // top = QPixmap(QString(":/images/top%1.png").arg(randomTop));
+
+    // 刷新角色显示
+    updateCharacter();
 }

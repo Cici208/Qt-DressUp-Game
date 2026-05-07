@@ -16,10 +16,10 @@ public:
 
 signals:
     void startGameClicked();
+    void musicToggleRequested();
 
 private:
     Ui::StartScreenWidget *ui;
-    // 所有动画相关变量/函数 全部删掉！
 };
 
 #endif // STARTSCREENWIDGET_H

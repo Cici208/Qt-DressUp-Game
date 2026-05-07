@@ -96,7 +96,7 @@ background-size:cover;</string>
      <widget class="QPushButton" name="btnPerson1">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>120</x>
         <y>20</y>
         <width>74</width>
         <height>94</height>
@@ -131,7 +131,7 @@ QPushButton:pressed {
      <widget class="QPushButton" name="btnPerson2">
       <property name="geometry">
        <rect>
-        <x>100</x>
+        <x>210</x>
         <y>20</y>
         <width>74</width>
         <height>94</height>
@@ -166,7 +166,7 @@ QPushButton:pressed {
      <widget class="QPushButton" name="btnPerson3">
       <property name="geometry">
        <rect>
-        <x>190</x>
+        <x>300</x>
         <y>20</y>
         <width>74</width>
         <height>94</height>
@@ -201,8 +201,8 @@ QPushButton:pressed {
      <widget class="QLabel" name="personLabel">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>120</y>
+        <x>120</x>
+        <y>110</y>
         <width>300</width>
         <height>400</height>
        </rect>
@@ -1146,6 +1146,105 @@ QPushButton:pressed {
         </widget>
        </widget>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="btnReturn">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>80</width>
+        <height>97</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: transparent;
+    border: none;
+}
+QPushButton:hover {
+    background-color: rgba(255,255,255,0.2); /* 鼠标悬浮时淡白高亮，可选 */
+    border-radius: 40px; /* 圆形图标就设为宽/高的一半，80x80的按钮就是40 */
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/return.png</normaloff>:/images/return.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>80</width>
+        <height>97</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnClean">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>502</y>
+        <width>80</width>
+        <height>93</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: transparent;
+    border: none;
+}
+QPushButton:hover {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 15px; /* 圆角和你的图标匹配 */
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/clean.png</normaloff>:/images/clean.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>80</width>
+        <height>93</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnRandom">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>500</y>
+        <width>190</width>
+        <height>90</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: transparent;
+    border: none;
+}
+QPushButton:hover {
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 15px; /* 圆角和你的图标匹配 */
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/random.png</normaloff>:/images/random.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>190</width>
+        <height>90</height>
+       </size>
+      </property>
      </widget>
     </widget>
    </widget>

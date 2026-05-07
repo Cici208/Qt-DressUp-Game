@@ -55,5 +55,9 @@
         <file>images/setting.png</file>
         <file>images/start.png</file>
         <file>images/bg_room.png</file>
+        <file>audio/bgm.mp3</file>
+        <file>images/clean.png</file>
+        <file>images/return.png</file>
+        <file>images/random.png</file>
     </qresource>
 </RCC>

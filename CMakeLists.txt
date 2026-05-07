@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(MiracleDressGame LANGUAGES CXX)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Multimedia)
 
 qt_standard_project_setup()
 
@@ -19,13 +19,14 @@ qt_add_executable(MiracleDressGame
     ${APP_RESOURCES}
 )
 
-# ✅ 这是你需要加的一行，告诉编译器头文件在当前目录
+#  这是你需要加的一行，告诉编译器头文件在当前目录
 target_include_directories(MiracleDressGame PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(MiracleDressGame
     PRIVATE
         Qt::Core
         Qt::Widgets
+        Qt::Multimedia
 )
 
 include(GNUInstallDirs)

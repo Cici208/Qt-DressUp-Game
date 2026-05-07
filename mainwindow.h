@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QPixmap>
 #include <QPainter>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,12 +26,20 @@ private slots:
     void selectPerson1();
     void selectPerson2();
     void selectPerson3();
-    void showGameScreen();  // 新增：切换到游戏界面
+    void showGameScreen();
+    void toggleMusic();
+    // ========== 新增：三个按钮的槽函数声明 ==========
+    void goBackToStartScreen();  // 返回开屏界面
+    void clearAllOutfits();      // 清空搭配
+    void randomOutfit();         // 随机搭配
 
 private:
     Ui::MainWindow *ui;
     QPixmap base, hair, dress, shoe;
     void updateCharacter();
+
+    QMediaPlayer *m_bgmPlayer;
+    QAudioOutput *m_audioOutput;
 };
 
 #endif // MAINWINDOW_H

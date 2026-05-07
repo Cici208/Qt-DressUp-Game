@@ -7,16 +7,13 @@ StartScreenWidget::StartScreenWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // 唯一一行代码：按钮透明（看不见，只能点击）
     this->setStyleSheet("QPushButton{background:transparent; border:none;}");
 
-    // 唯一功能：点击开始按钮 → 进入游戏
     connect(ui->btnStart, &QPushButton::clicked, this, &StartScreenWidget::startGameClicked);
+    connect(ui->btnMusic, &QPushButton::clicked, this, &StartScreenWidget::musicToggleRequested);
 }
 
 StartScreenWidget::~StartScreenWidget()
 {
     delete ui;
 }
-
-
