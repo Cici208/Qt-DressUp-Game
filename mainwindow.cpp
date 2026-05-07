@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "startscreenwidget.h"
 #include "ui_mainwindow.h"
 #include <QPushButton>
 #include <QScrollBar>
@@ -7,43 +8,46 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // 固定窗口大小 900x600（匹配你的1536*1024原图3:2比例，最清晰）
+    this->setFixedSize(900, 600);
+    this->statusBar()->hide();
 
     // 背景：原图比例不拉伸
     this->setStyleSheet(R"(
-        MainWindow {
-            background-image: url(:/images/bg_room.jpg);
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-        }
-    )");
+    MainWindow {
+        background-image: url(:/images/bg_room.png);
+        background-repeat: no-repeat;
+        background-position: top left;
+        background-size:
+    }
+)");
 
-    ui->centralwidget->setStyleSheet("background:transparent;");
 
-    // 加深版衣柜磨砂
+
+    // 加深版衣柜磨砂（原始正常代码，恢复它！）
     ui->tabWidget->setStyleSheet(R"(
-        QTabWidget{background:transparent; border:none;}
-        QTabWidget::pane{
-            background:rgba(255,240,243,0.45);
-            border-radius:12px;
-            border:none;
-        }
-        QTabBar::tab{
-            background:transparent;
-            color:#d87093;
-            padding:7px 15px;
-            border:none;
-            border-radius:8px;
-            font-size:14px;
-        }
-        QTabBar::tab:selected{
-            background:rgba(255,179,190,0.75);
-            color:white;
-        }
-        QTabBar::tab:hover{
-            background:rgba(255,179,190,0.4);
-        }
-    )");
+    QTabWidget{background:transparent; border:none;}
+    QTabWidget::pane{
+        background:rgba(255,240,243,0.45);
+        border-radius:12px;
+        border:none;
+    }
+    QTabBar::tab{
+        background:transparent;
+        color:#d87093;
+        padding:7px 15px;
+        border:none;
+        border-radius:8px;
+        font-size:14px;
+    }
+    QTabBar::tab:selected{
+        background:rgba(255,179,190,0.75);
+        color:white;
+    }
+    QTabBar::tab:hover{
+        background:rgba(255,179,190,0.4);
+    }
+)");
 
     ui->scrollArea->setStyleSheet("background:transparent; border:none;");
     ui->scrollAreaWidgetContents->setStyleSheet("background:transparent;");
@@ -62,6 +66,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
         "}"
         "QScrollBar::add-line,QScrollBar::sub-line{border:none; background:none;}"
         );
+
+    // 只加这2行！单独修复衣服、鞋子的黑底，不影响发饰！
+    ui->scrollArea_2->setStyleSheet("background:transparent; border:none;");
+    ui->scrollArea_5->setStyleSheet("background:transparent; border:none;");
+
 
     ui->personLabel->setStyleSheet("background:transparent;");
     ui->personLabel->setAlignment(Qt::AlignCenter);
@@ -102,11 +111,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(ui->shoe4, &QPushButton::clicked, this, &MainWindow::selectShoe);
 
     updateCharacter();
+    // =====新增：连接开屏界面的开始游戏按钮 =====
+        connect(ui->startScreenWidget,
+                &StartScreenWidget::startGameClicked, this,
+                &MainWindow::showGameScreen);
+
+    // 初始显示开屏界面（第0页）
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+void MainWindow::showGameScreen()
+{
+    // 切换到游戏界面（第1页）
+    ui->stackedWidget->setCurrentIndex(1);
 }
 
 void MainWindow::selectHair(){ auto btn = qobject_cast<QPushButton*>(sender()); if(btn) hair = QPixmap(":/images/" + btn->objectName() + ".png"); updateCharacter(); }
@@ -129,5 +150,5 @@ void MainWindow::updateCharacter()
     if(!hair.isNull()) painter.drawPixmap(0,0,hair);
 
     painter.end();
-    ui->personLabel->setPixmap(result.scaled(ui->personLabel->size(), Qt::KeepAspectRatio));
+    ui->personLabel->setPixmap(result.scaled(ui->personLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }

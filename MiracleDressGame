@@ -1,0 +1,22 @@
+QT       += core gui widgets
+
+# 项目版本配置
+TARGET = MiracleDressGame
+TEMPLATE = app
+
+# 所有源文件/头文件（必须声明，编译器才能找到）
+SOURCES += \
+    main.cpp \
+    mainwindow.cpp \
+    startscreenwidget.cpp
+
+HEADERS += \
+    mainwindow.h \
+    startscreenwidget.h
+
+# 资源文件（如果你有images.qrc，务必加上）
+RESOURCES += \
+    images.qrc
+
+# 编译配置
+QMAKE_CXXFLAGS += -std=c++17

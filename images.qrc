@@ -49,6 +49,11 @@
         <file>images/shoe2_thumb.png</file>
         <file>images/shoe3_thumb.png</file>
         <file>images/shoe4_thumb.png</file>
-        <file>images/bg_room.jpg</file>
+        <file>images/start_bg.png</file>
+        <file>images/music.png</file>
+        <file>images/notice.png</file>
+        <file>images/setting.png</file>
+        <file>images/start.png</file>
+        <file>images/bg_room.png</file>
     </qresource>
 </RCC>

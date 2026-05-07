@@ -24,6 +24,7 @@ private slots:
     void selectPerson1();
     void selectPerson2();
     void selectPerson3();
+    void showGameScreen();  // 新增：切换到游戏界面
 
 private:
     Ui::MainWindow *ui;

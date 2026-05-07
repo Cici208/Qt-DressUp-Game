@@ -15,8 +15,12 @@ qt_add_executable(MiracleDressGame
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    startscreenwidget.h startscreenwidget.cpp startscreenwidget.ui
     ${APP_RESOURCES}
 )
+
+# ✅ 这是你需要加的一行，告诉编译器头文件在当前目录
+target_include_directories(MiracleDressGame PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(MiracleDressGame
     PRIVATE
