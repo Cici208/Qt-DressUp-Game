@@ -40,29 +40,62 @@ MainWindow {
 
 
 
-    // 加深版衣柜磨砂（原始正常代码，恢复它！）
     ui->tabWidget->setStyleSheet(R"(
-    QTabWidget{background:transparent; border:none;}
-    QTabWidget::pane{
-        background:rgba(255,240,243,0.45);
-        border-radius:12px;
-        border:none;
-    }
-    QTabBar::tab{
-        background:transparent;
-        color:#d87093;
-        padding:7px 15px;
-        border:none;
-        border-radius:8px;
-        font-size:14px;
-    }
-    QTabBar::tab:selected{
-        background:rgba(255,179,190,0.75);
-        color:white;
-    }
-    QTabBar::tab:hover{
-        background:rgba(255,179,190,0.4);
-    }
+QTabWidget{
+    background:transparent;
+    border:none;
+}
+
+/* 衣柜面板 100% 透明，完美显示背景衣柜 */
+QTabWidget::pane{
+    background: transparent;
+    border: none;
+    margin-top: 8px;
+}
+
+QTabWidget::tab-bar {
+    subcontrol-origin: margin;
+    subcontrol-position: top;
+    left: -3px;       /* 【关键】数字越大，标签整体越往右！直接调这个！ */
+    top: 3px;         /* 上下位置微调，不用改也行 */
+}
+
+/* 标签整体位置：精准适配你的新背景 */
+QTabBar{
+    alignment: center;
+    margin-top: 9px;   /* 标签整体往上移，贴合背景 */
+    margin-left: 500px;
+
+    spacing: 100px;
+}
+
+/* 标签大小/样式：和背景完美匹配 */
+QTabBar::tab{
+    background:rgba(255,225,230,0.1);
+    color:#d87093;
+    border-radius: 18px;
+    min-width: 59px;   /* 宽度适配 */
+    max-width: 59px;
+    min-height: 27px;   /* 高度适配 */
+    margin-right: 0px; /* 间距适配 */
+    margin: 0 8px;
+    padding: 5px 10px;
+    font-size: 13px;
+    border:none;
+}
+
+QTabBar::tab:last-child{
+    margin-right: 0px;
+}
+
+QTabBar::tab:selected{
+    background:rgba(255,179,190,0.4);
+    color:white;
+}
+
+QTabBar::tab:hover{
+    background:rgba(255,179,190,0.2);
+}
 )");
 
     ui->scrollArea->setStyleSheet("background:transparent; border:none;");

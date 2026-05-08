@@ -227,20 +227,20 @@ QPushButton:pressed {
       <property name="geometry">
        <rect>
         <x>430</x>
-        <y>20</y>
+        <y>34</y>
         <width>361</width>
-        <height>511</height>
+        <height>491</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>发饰</string>
+        <string>     </string>
        </attribute>
        <widget class="QScrollArea" name="scrollArea">
         <property name="geometry">
@@ -576,7 +576,7 @@ QPushButton:pressed {
       </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
-        <string>裙子</string>
+        <string>     </string>
        </attribute>
        <widget class="QScrollArea" name="scrollArea_2">
         <property name="geometry">
@@ -964,7 +964,7 @@ QPushButton:pressed {
       </widget>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
-        <string>鞋子</string>
+        <string>     </string>
        </attribute>
        <widget class="QScrollArea" name="scrollArea_5">
         <property name="geometry">
