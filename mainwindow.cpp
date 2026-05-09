@@ -1,19 +1,24 @@
 #include "mainwindow.h"
 #include "startscreenwidget.h"
 #include "ui_mainwindow.h"
+#include "stickerlabel.h"
 #include <QPushButton>
 #include <QScrollBar>
-#include <QRandomGenerator>  // 新增！随机搭配必须用
+#include <QRandomGenerator>
+#include <QMouseEvent>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , isDragging(false)
+    , dragLabel(nullptr)
 {
     ui->setupUi(this);
-    // 固定窗口大小 900x600（匹配你的1536*1024原图3:2比例，最清晰）
+    this->installEventFilter(this);
+
     this->setFixedSize(900, 600);
     this->statusBar()->hide();
 
-    // 背景：原图比例不拉伸 正确写法，样式表单独一段
     this->setStyleSheet(R"(
 MainWindow {
     background-image: url(:/images/bg_room.png);
@@ -23,22 +28,13 @@ MainWindow {
 }
 )");
 
-    // ======================
-    // 背景音乐初始化  放在样式表外面！独立代码！
-    // ======================
     m_bgmPlayer = new QMediaPlayer(this);
     m_audioOutput = new QAudioOutput(this);
     m_bgmPlayer->setAudioOutput(m_audioOutput);
-
     m_bgmPlayer->setSource(QUrl("qrc:/audio/bgm.mp3"));
     m_audioOutput->setVolume(0.5);
     m_bgmPlayer->setLoops(QMediaPlayer::Infinite);
-
-    // 关联开屏音乐按钮
-    connect(ui->startScreenWidget, &StartScreenWidget::musicToggleRequested,
-            this, &MainWindow::toggleMusic);
-
-
+    connect(ui->startScreenWidget, &StartScreenWidget::musicToggleRequested, this, &MainWindow::toggleMusic);
 
     ui->tabWidget->setStyleSheet(R"(
 QTabWidget{
@@ -100,26 +96,13 @@ QTabBar::tab:hover{
 
     ui->scrollArea->setStyleSheet("background:transparent; border:none;");
     ui->scrollAreaWidgetContents->setStyleSheet("background:transparent;");
-
-    // 加深版滚动条
     ui->scrollArea->verticalScrollBar()->setStyleSheet(
-        "QScrollBar:vertical{"
-        "   background:transparent;"
-        "   width:6px;"
-        "   border-radius:3px;"
-        "}"
-        "QScrollBar::handle:vertical{"
-        "   background:rgba(230,150,165,0.7);"
-        "   border-radius:3px;"
-        "   min-height:30px;"
-        "}"
+        "QScrollBar:vertical{ background:transparent; width:6px; border-radius:3px; }"
+        "QScrollBar::handle:vertical{ background:rgba(230,150,165,0.7); border-radius:3px; min-height:30px; }"
         "QScrollBar::add-line,QScrollBar::sub-line{border:none; background:none;}"
         );
-
-    // 只加这2行！单独修复衣服、鞋子的黑底，不影响发饰！
     ui->scrollArea_2->setStyleSheet("background:transparent; border:none;");
     ui->scrollArea_5->setStyleSheet("background:transparent; border:none;");
-
 
     ui->personLabel->setStyleSheet("background:transparent;");
     ui->personLabel->setAlignment(Qt::AlignCenter);
@@ -132,7 +115,6 @@ QTabBar::tab:hover{
     connect(ui->btnPerson1, &QPushButton::clicked, this, &MainWindow::selectPerson1);
     connect(ui->btnPerson2, &QPushButton::clicked, this, &MainWindow::selectPerson2);
     connect(ui->btnPerson3, &QPushButton::clicked, this, &MainWindow::selectPerson3);
-
     connect(ui->hair1, &QPushButton::clicked, this, &MainWindow::selectHair);
     connect(ui->hair2, &QPushButton::clicked, this, &MainWindow::selectHair);
     connect(ui->hair3, &QPushButton::clicked, this, &MainWindow::selectHair);
@@ -142,7 +124,6 @@ QTabBar::tab:hover{
     connect(ui->hair7, &QPushButton::clicked, this, &MainWindow::selectHair);
     connect(ui->hair8, &QPushButton::clicked, this, &MainWindow::selectHair);
     connect(ui->hair9, &QPushButton::clicked, this, &MainWindow::selectHair);
-
     connect(ui->dress1, &QPushButton::clicked, this, &MainWindow::selectDress);
     connect(ui->dress2, &QPushButton::clicked, this, &MainWindow::selectDress);
     connect(ui->dress3, &QPushButton::clicked, this, &MainWindow::selectDress);
@@ -153,43 +134,90 @@ QTabBar::tab:hover{
     connect(ui->dress8, &QPushButton::clicked, this, &MainWindow::selectDress);
     connect(ui->dress9, &QPushButton::clicked, this, &MainWindow::selectDress);
     connect(ui->dress10,&QPushButton::clicked, this, &MainWindow::selectDress);
-
     connect(ui->shoe1, &QPushButton::clicked, this, &MainWindow::selectShoe);
     connect(ui->shoe2, &QPushButton::clicked, this, &MainWindow::selectShoe);
     connect(ui->shoe3, &QPushButton::clicked, this, &MainWindow::selectShoe);
     connect(ui->shoe4, &QPushButton::clicked, this, &MainWindow::selectShoe);
 
     updateCharacter();
-    // =====新增：连接开屏界面的开始游戏按钮 =====
-        connect(ui->startScreenWidget,
-                &StartScreenWidget::startGameClicked, this,
-                &MainWindow::showGameScreen);
 
-    // 初始显示开屏界面（第0页）
+    connect(ui->startScreenWidget, &StartScreenWidget::startGameClicked, this, &MainWindow::showGameScreen);
     ui->stackedWidget->setCurrentIndex(0);
-        // ========== 新增：连接三个按钮的点击信号 ==========
-        // 1. 返回按钮：点击切回开屏界面
-        connect(ui->btnReturn, &QPushButton::clicked, this, &MainWindow::goBackToStartScreen);
-        // 2. 清空搭配按钮：点击清空所有服装
-        connect(ui->btnClean, &QPushButton::clicked, this, &MainWindow::clearAllOutfits);
-        // 3. 随机搭配按钮：点击随机选服装
-        connect(ui->btnRandom, &QPushButton::clicked, this, &MainWindow::randomOutfit);
 
-        // 确保按钮显示在最上层（防止被背景挡住）
-        ui->btnReturn->raise();
-        ui->btnClean->raise();
-        ui->btnRandom->raise();
+    connect(ui->btnReturn, &QPushButton::clicked, this, &MainWindow::goBackToStartScreen);
+    connect(ui->btnClean, &QPushButton::clicked, this, &MainWindow::clearAllOutfits);
+    connect(ui->btnRandom, &QPushButton::clicked, this, &MainWindow::randomOutfit);
+    ui->btnReturn->raise();
+    ui->btnClean->raise();
+    ui->btnRandom->raise();
+
+    connect(ui->btnGoPhoto, &QPushButton::clicked, this, [=](){
+        currentPhotoBg = QPixmap(":/images/photo/bg1.png");
+        QPixmap scaledBg = currentPhotoBg.scaled(ui->lblPhotoCanvas->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+        ui->lblPhotoCanvas->setPixmap(scaledBg);
+        ui->lblCharacter->setPixmap(ui->personLabel->pixmap());
+        ui->stackedWidget->setCurrentIndex(2);
+    });
+    connect(ui->btnBackToGame, &QPushButton::clicked, this, [=](){
+        ui->stackedWidget->setCurrentIndex(1);
+    });
+    connect(ui->btnBg1, &QPushButton::clicked, this, &MainWindow::on_btnBg1_clicked);
+    connect(ui->btnBg2, &QPushButton::clicked, this, &MainWindow::on_btnBg2_clicked);
+    connect(ui->btnBg3, &QPushButton::clicked, this, &MainWindow::on_btnBg3_clicked);
+
+    // ====================== 核心修复！贴纸初始化 ======================
+    QList<QLabel*> allStickers = ui->scrollLeftStickers->findChildren<QLabel*>() + ui->scrollRightStickers->findChildren<QLabel*>();
+    for (QLabel* sticker : allStickers) {
+        QPixmap pix = sticker->pixmap();
+        if (!pix.isNull()) {
+            QPixmap scaledPix = pix.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            sticker->setPixmap(scaledPix);
+            sticker->setScaledContents(false);
+            sticker->setAlignment(Qt::AlignCenter);
+
+            // 修复1：设置QLabel可接收鼠标事件（关键！默认不接收）
+            sticker->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+            sticker->setMouseTracking(true);
+
+            // 修复2：给每个贴纸安装事件过滤器（必须！否则双击事件收不到）
+            sticker->installEventFilter(this);
+        }
+    }
+    // 代码强制把人物放进拍照画布里，不用手动拖UI
+    ui->lblCharacter->setParent(ui->lblPhotoCanvas);
+    // 给小人安装事件过滤器
+    ui->lblCharacter->installEventFilter(this);
+    connect(ui->btnTakePhoto, &QPushButton::clicked, this, &MainWindow::takePhoto);
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
+void MainWindow::on_btnBg1_clicked() {
+    currentPhotoBg = QPixmap(":/images/photo/bg1.png");
+    QPixmap scaledBg = currentPhotoBg.scaled(ui->lblPhotoCanvas->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    ui->lblPhotoCanvas->setPixmap(scaledBg);
 }
-void MainWindow::showGameScreen()
-{
-    // 切换到游戏界面（第1页）
-    ui->stackedWidget->setCurrentIndex(1);
+void MainWindow::on_btnBg2_clicked() {
+    currentPhotoBg = QPixmap(":/images/photo/bg2.png");
+    QPixmap scaledBg = currentPhotoBg.scaled(ui->lblPhotoCanvas->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    ui->lblPhotoCanvas->setPixmap(scaledBg);
 }
+void MainWindow::on_btnBg3_clicked() {
+    currentPhotoBg = QPixmap(":/images/photo/bg3.png");
+    QPixmap scaledBg = currentPhotoBg.scaled(ui->lblPhotoCanvas->size(), Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+    ui->lblPhotoCanvas->setPixmap(scaledBg);
+}
+
+void MainWindow::addStickerToBar(QWidget *container, const QString &imagePath) {
+    StickerLabel *sticker = new StickerLabel(container);
+    QPixmap pix(imagePath);
+    QPixmap scaledPix = pix.scaled(50, 50, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    sticker->setPixmap(scaledPix);
+    sticker->setFixedSize(scaledPix.size());
+    container->layout()->addWidget(sticker);
+}
+
+MainWindow::~MainWindow() { delete ui; }
+
+void MainWindow::showGameScreen() { ui->stackedWidget->setCurrentIndex(1); }
 
 void MainWindow::selectHair(){ auto btn = qobject_cast<QPushButton*>(sender()); if(btn) hair = QPixmap(":/images/" + btn->objectName() + ".png"); updateCharacter(); }
 void MainWindow::selectDress(){ auto btn = qobject_cast<QPushButton*>(sender()); if(btn) dress = QPixmap(":/images/" + btn->objectName() + ".png"); updateCharacter(); }
@@ -198,76 +226,110 @@ void MainWindow::selectPerson1(){ base = QPixmap(":/images/person1.png"); hair =
 void MainWindow::selectPerson2(){ base = QPixmap(":/images/person2.png"); hair = dress = shoe = QPixmap(); updateCharacter(); }
 void MainWindow::selectPerson3(){ base = QPixmap(":/images/person3.png"); hair = dress = shoe = QPixmap(); updateCharacter(); }
 
-void MainWindow::updateCharacter()
-{
+void MainWindow::updateCharacter() {
     if(base.isNull()) base = QPixmap(":/images/person1.png");
     QPixmap result(base.size());
     result.fill(Qt::transparent);
     QPainter painter(&result);
-
     painter.drawPixmap(0, 0, base);
     if(!shoe.isNull()) painter.drawPixmap(0,0,shoe);
     if(!dress.isNull()) painter.drawPixmap(0,0,dress);
     if(!hair.isNull()) painter.drawPixmap(0,0,hair);
-
     painter.end();
     ui->personLabel->setPixmap(result.scaled(ui->personLabel->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
-// 播放/暂停 切换（你要的功能！）
-void MainWindow::toggleMusic()
-{
-    if (m_bgmPlayer->playbackState() == QMediaPlayer::PlayingState)
-    {
-        // 如果正在播放 → 暂停
-        m_bgmPlayer->pause();
-    }
-    else
-    {
-        // 如果暂停/停止 → 播放
-        m_bgmPlayer->play();
-    }
-}
-// ========== 1. 返回开屏界面功能 ==========
-void MainWindow::goBackToStartScreen()
-{
-    // StackedWidget的第0页是开屏界面，直接切换过去
-    ui->stackedWidget->setCurrentIndex(0);
+
+void MainWindow::toggleMusic() {
+    if (m_bgmPlayer->playbackState() == QMediaPlayer::PlayingState) m_bgmPlayer->pause();
+    else m_bgmPlayer->play();
 }
 
-// ========== 2. 清空搭配功能 ==========
-void MainWindow::clearAllOutfits()
-{
-    // 清空你所有的服装变量（和你updateCharacter里的变量完全对应）
-    hair = QPixmap();   // 发型
-    dress = QPixmap();  // 连衣裙
-    shoe = QPixmap();   // 鞋子
-    // 后面你如果加了上衣、下装、袜子，也要在这里一起清空！
-    // 比如：top = QPixmap(); bottom = QPixmap(); socks = QPixmap();
-
-    // 调用updateCharacter，刷新角色显示
-    updateCharacter();
-}
-
-// ========== 3. 随机搭配功能（和你现有的服装数量对应！） ==========
-void MainWindow::randomOutfit()
-{
-    // --- 注意：这里的数字要和你实际的服装数量一致！---
-    // 你的hair有9个（hair1到hair9），所以范围是1-9
+void MainWindow::goBackToStartScreen() { ui->stackedWidget->setCurrentIndex(0); }
+void MainWindow::clearAllOutfits() { hair = QPixmap(); dress = QPixmap(); shoe = QPixmap(); updateCharacter(); }
+void MainWindow::randomOutfit() {
     int randomHair = QRandomGenerator::global()->bounded(1, 10);
-    // 你的dress有10个（dress1到dress10），所以范围是1-10
     int randomDress = QRandomGenerator::global()->bounded(1, 11);
-    // 你的shoe有4个（shoe1到shoe4），所以范围是1-4
     int randomShoe = QRandomGenerator::global()->bounded(1, 5);
-
-    // 给服装变量赋值（路径和你selectHair里的路径完全一致！）
     hair = QPixmap(QString(":/images/hair%1.png").arg(randomHair));
     dress = QPixmap(QString(":/images/dress%1.png").arg(randomDress));
     shoe = QPixmap(QString(":/images/shoe%1.png").arg(randomShoe));
-
-    // 后面加了上衣/下装的话，也可以在这里加随机代码
-    // 比如：int randomTop = QRandomGenerator::global()->bounded(1, 6);
-    // top = QPixmap(QString(":/images/top%1.png").arg(randomTop));
-
-    // 刷新角色显示
     updateCharacter();
+}
+
+// 最终版：双击添加贴纸 + 画布自由拖动（100%生效）
+bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
+    QLabel* label = qobject_cast<QLabel*>(obj);
+    if (!label) return QMainWindow::eventFilter(obj, event);
+
+    // -------------------- 1. 双击贴纸栏 → 添加到画布（修复版）--------------------
+    if (event->type() == QEvent::MouseButtonDblClick) {
+        QMouseEvent* me = static_cast<QMouseEvent*>(event);
+        if (me->button() == Qt::LeftButton) {
+            // 检查是否是贴纸栏的贴纸（scrollLeftStickers/scrollRightStickers的子控件）
+            QWidget* parent = label->parentWidget();
+            while (parent) {
+                if (parent == ui->scrollLeftStickers || parent == ui->scrollRightStickers) {
+                    // 确认是贴纸栏的贴纸，执行添加逻辑
+                    QPixmap pix = label->pixmap();
+                    if (!pix.isNull()) {
+                        QLabel* newSticker = new QLabel(ui->lblPhotoCanvas);
+                        newSticker->setPixmap(pix);
+                        newSticker->setStyleSheet("background:transparent;");
+                        newSticker->setAlignment(Qt::AlignCenter);
+                        // 画布中心位置（完美居中）
+                        newSticker->move(
+                            ui->lblPhotoCanvas->width()/2 - pix.width()/2,
+                            ui->lblPhotoCanvas->height()/2 - pix.height()/2
+                            );
+                        newSticker->show();
+                        newSticker->installEventFilter(this);
+                        // 贴纸置顶
+                        newSticker->raise();
+                        // 人物压到最底下
+                        ui->lblCharacter->lower();
+                    }
+                    return true; // 拦截事件，不再传递
+                }
+                parent = parent->parentWidget();
+            }
+        }
+    }
+
+    // -------------------- 2. 仅允许画布/小人拖动（保持不变）--------------------
+    if (label->parentWidget() != ui->lblPhotoCanvas && label != ui->lblCharacter) {
+        return QMainWindow::eventFilter(obj, event);
+    }
+
+    QMouseEvent* me = static_cast<QMouseEvent*>(event);
+    static QPoint offset;
+
+    if (event->type() == QEvent::MouseButtonPress && me->button() == Qt::LeftButton) {
+        offset = me->pos();
+        label->raise();
+        return true;
+    }
+    if (event->type() == QEvent::MouseMove && me->buttons() & Qt::LeftButton) {
+        label->move(label->pos() + me->pos() - offset);
+        return true;
+    }
+    return QMainWindow::eventFilter(obj, event);
+}
+// 拍照保存函数（必须和头文件声明完全一致）
+void MainWindow::takePhoto()
+{
+    // 截取拍照画布
+    QPixmap photo = ui->lblPhotoCanvas->grab();
+
+    // 弹出保存窗口
+    QString savePath = QFileDialog::getSaveFileName(
+        this,
+        "Save Photo",
+        "MyPhoto.png",
+        "PNG Image (*.png)"
+        );
+
+    // 保存图片
+    if (!savePath.isEmpty()) {
+        photo.save(savePath);
+    }
 }

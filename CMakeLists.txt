@@ -17,6 +17,7 @@ qt_add_executable(MiracleDressGame
     mainwindow.ui
     startscreenwidget.h startscreenwidget.cpp startscreenwidget.ui
     ${APP_RESOURCES}
+    stickerlabel.h stickerlabel.cpp
 )
 
 #  这是你需要加的一行，告诉编译器头文件在当前目录

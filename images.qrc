@@ -59,5 +59,40 @@
         <file>images/clean.png</file>
         <file>images/return.png</file>
         <file>images/random.png</file>
+        <file>images/photo.png</file>
+        <file>images/photo/bg1.png</file>
+        <file>images/photo/bg2.png</file>
+        <file>images/photo/bg3.png</file>
+        <file>images/photo/bg_btn1.png</file>
+        <file>images/photo/bg_btn2.png</file>
+        <file>images/photo/bg_btn3.png</file>
+        <file>images/photo/stickers/stickerL1.png</file>
+        <file>images/photo/stickers/stickerL2.png</file>
+        <file>images/photo/stickers/stickerL3.png</file>
+        <file>images/photo/stickers/stickerL4.png</file>
+        <file>images/photo/stickers/stickerL5.png</file>
+        <file>images/photo/stickers/stickerL6.png</file>
+        <file>images/photo/stickers/stickerL7.png</file>
+        <file>images/photo/stickers/stickerL8.png</file>
+        <file>images/photo/stickers/stickerL9.png</file>
+        <file>images/photo/stickers/stickerL10.png</file>
+        <file>images/photo/stickers/stickerL11.png</file>
+        <file>images/photo/stickers/stickerL12.png</file>
+        <file>images/photo/stickers/stickerL13.png</file>
+        <file>images/photo/stickers/stickerL14.png</file>
+        <file>images/photo/stickers/stickerL15.png</file>
+        <file>images/photo/stickers/stickerL16.png</file>
+        <file>images/photo/stickers/stickerL17.png</file>
+        <file>images/photo/stickers/stickerR1.png</file>
+        <file>images/photo/stickers/stickerR2.png</file>
+        <file>images/photo/stickers/stickerR3.png</file>
+        <file>images/photo/stickers/stickerR4.png</file>
+        <file>images/photo/stickers/stickerR5.png</file>
+        <file>images/photo/stickers/stickerR6.png</file>
+        <file>images/photo/stickers/stickerR7.png</file>
+        <file>images/photo/stickers/stickerR8.png</file>
+        <file>images/photo/stickers/stickerR9.png</file>
+        <file>images/photo/stickers/stickerR10.png</file>
+        <file>images/photonext.png</file>
     </qresource>
 </RCC>
