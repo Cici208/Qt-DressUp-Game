@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QMediaPlayer>
 #include <QAudioOutput>
+#include "stickerlabel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,6 +19,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
 private slots:
     void selectHair();
@@ -28,10 +30,14 @@ private slots:
     void selectPerson3();
     void showGameScreen();
     void toggleMusic();
-    // ========== 新增：三个按钮的槽函数声明 ==========
-    void goBackToStartScreen();  // 返回开屏界面
-    void clearAllOutfits();      // 清空搭配
-    void randomOutfit();         // 随机搭配
+    void goBackToStartScreen();
+    void clearAllOutfits();
+    void randomOutfit();
+    void on_btnBg1_clicked();
+    void on_btnBg2_clicked();
+    void on_btnBg3_clicked();
+
+    void takePhoto(); // 必须和我写的一模一样！大小写不能错！
 
 private:
     Ui::MainWindow *ui;
@@ -40,6 +46,12 @@ private:
 
     QMediaPlayer *m_bgmPlayer;
     QAudioOutput *m_audioOutput;
+    bool isDragging;
+    QPoint dragOffset;
+    QLabel *dragLabel;
+
+    QPixmap currentPhotoBg;
+    void addStickerToBar(QWidget *container, const QString &imagePath);
 };
 
 #endif // MAINWINDOW_H
